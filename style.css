@@ -90,6 +90,32 @@ body {
   margin-bottom: 24px;
 }
 
+.dashboard-hoje-inicial {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.dashboard-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(47, 180, 255, 0.14);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.dashboard-item span {
+  display: block;
+  font-size: 12px;
+  color: #cfe7ff;
+  margin-bottom: 6px;
+}
+
+.dashboard-item strong {
+  font-size: 18px;
+  color: #ffffff;
+}
+
 .btn-hero {
   border: none;
   width: 100%;
@@ -168,6 +194,21 @@ body {
   margin-bottom: 16px;
 }
 
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.dashboard-grid-mes {
+  margin-top: -4px;
+}
+
+.destaque-hoje {
+  border: 1px solid rgba(47, 180, 255, 0.36);
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -230,7 +271,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .grupos-preco {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
   margin-top: 4px;
 }
@@ -281,13 +322,18 @@ input[type="number"]::-webkit-inner-spin-button {
   margin-top: 16px;
 }
 
-.btn-manual {
+.btn-manual,
+.btn-pdf {
   background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
   border: 1px solid rgba(47, 180, 255, 0.18);
   font-weight: 700;
   cursor: pointer;
   min-height: 54px;
+}
+
+.btn-pdf {
+  max-width: 260px;
 }
 
 .manual-area {
@@ -388,16 +434,23 @@ input[type="number"]::-webkit-inner-spin-button {
   display: block;
 }
 
-.titulo-com-filtro {
+.topo-historico {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: center;
   gap: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-.filtro-cliente {
-  width: 280px;
+.topo-historico h3 {
+  margin-bottom: 0;
+}
+
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
 }
 
 .tabela-mobile {
@@ -405,6 +458,10 @@ input[type="number"]::-webkit-inner-spin-button {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: 16px;
+}
+
+.cards-mobile {
+  display: none;
 }
 
 table {
@@ -443,6 +500,67 @@ td button {
   font-weight: 700;
 }
 
+.card-historico-mobile {
+  background: var(--card-soft);
+  border: 1px solid rgba(47, 180, 255, 0.12);
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.card-historico-mobile .linha-titulo {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.card-historico-mobile .nome-cliente {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.card-historico-mobile .data-card {
+  font-size: 13px;
+  color: #bcdfff;
+}
+
+.card-historico-mobile .grid-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.card-historico-mobile .info-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.card-historico-mobile .info-item span {
+  display: block;
+  font-size: 12px;
+  color: #bcdfff;
+  margin-bottom: 4px;
+}
+
+.card-historico-mobile .info-item strong {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.card-historico-mobile .btn-excluir-mobile {
+  background: var(--danger);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .sem-registros {
   text-align: center;
   color: #cfe7ff;
@@ -454,7 +572,10 @@ td button {
   .topo-app,
   .painel-grid,
   .resumo,
-  .grupos-preco {
+  .grupos-preco,
+  .dashboard-grid,
+  .filtros-grid,
+  .dashboard-hoje-inicial {
     grid-template-columns: 1fr;
   }
 
@@ -538,7 +659,11 @@ td button {
   }
 
   .form-grid,
-  .manual-area {
+  .manual-area,
+  .dashboard-grid,
+  .resumo,
+  .painel-grid,
+  .filtros-grid {
     grid-template-columns: 1fr;
     gap: 10px;
   }
@@ -552,10 +677,6 @@ td button {
   input,
   select {
     min-height: 54px;
-  }
-
-  .grupos-preco {
-    gap: 12px;
   }
 
   .grupo-preco {
@@ -573,12 +694,6 @@ td button {
     font-size: 17px;
   }
 
-  .painel-grid,
-  .resumo {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
   .mini-card {
     min-height: auto;
   }
@@ -587,20 +702,24 @@ td button {
     font-size: 20px;
   }
 
-  .titulo-com-filtro {
+  .topo-historico {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .filtro-cliente {
-    width: 100%;
+  .btn-pdf {
+    max-width: 100%;
   }
 
   #graficoLucro {
     height: 220px;
   }
 
-  table {
-    min-width: 1020px;
+  .cards-mobile {
+    display: block;
+  }
+
+  .tabela-mobile {
+    display: none;
   }
 }
