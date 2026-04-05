@@ -16,6 +16,21 @@
         <h1>Bom dia, JOFEL PLAY</h1>
         <p>Vamos empreender hoje?</p>
 
+        <div class="dashboard-hoje-inicial">
+          <div class="dashboard-item">
+            <span>Faturamento de hoje</span>
+            <strong>R$ <span id="heroFaturamentoHoje">0.00</span></strong>
+          </div>
+          <div class="dashboard-item">
+            <span>Lucro de hoje</span>
+            <strong>R$ <span id="heroLucroHoje">0.00</span></strong>
+          </div>
+          <div class="dashboard-item">
+            <span>Clientes do dia</span>
+            <strong><span id="heroClientesHoje">0</span></strong>
+          </div>
+        </div>
+
         <button type="button" class="btn-hero" onclick="abrirApp()">
           Sim, vamos começar
         </button>
@@ -28,10 +43,44 @@
 
         <div class="topo-texto">
           <span class="mini-tag">Controle financeiro</span>
-          <h2>Novo aluguel</h2>
+          <h2>Painel da JOFEL PLAY</h2>
           <p>Cadastre, acompanhe e mantenha tudo organizado.</p>
         </div>
       </header>
+
+      <section class="dashboard-grid">
+        <div class="mini-card destaque-hoje">
+          <span>Faturamento de hoje</span>
+          <strong>R$ <span id="faturamentoHoje">0.00</span></strong>
+        </div>
+
+        <div class="mini-card destaque-hoje">
+          <span>Lucro de hoje</span>
+          <strong>R$ <span id="lucroHoje">0.00</span></strong>
+        </div>
+
+        <div class="mini-card destaque-hoje">
+          <span>Clientes do dia</span>
+          <strong><span id="clientesHoje">0</span></strong>
+        </div>
+      </section>
+
+      <section class="dashboard-grid dashboard-grid-mes">
+        <div class="mini-card">
+          <span>Faturamento do mês</span>
+          <strong>R$ <span id="faturamentoMes">0.00</span></strong>
+        </div>
+
+        <div class="mini-card">
+          <span>Lucro do mês</span>
+          <strong>R$ <span id="lucroMes">0.00</span></strong>
+        </div>
+
+        <div class="mini-card">
+          <span>Clientes do mês</span>
+          <strong><span id="clientesMes">0</span></strong>
+        </div>
+      </section>
 
       <section class="card">
         <h3>Novo aluguel</h3>
@@ -62,28 +111,29 @@
           </div>
 
           <div class="grupo-preco">
-  <div class="grupo-titulo">Diária</div>
-  <div class="botoes-preco">
-    <button type="button" onclick="selecionarOpcao(this, 'diaria', '1', 50, 'Diária / 1 manete')">
-      Diária / 1 manete - R$50
-    </button>
-    <button type="button" onclick="selecionarOpcao(this, 'diaria', '2', 60, 'Diária / 2 manetes')">
-      Diária / 2 manetes - R$60
-    </button>
-  </div>
-</div>
+            <div class="grupo-titulo">Diária</div>
+            <div class="botoes-preco">
+              <button type="button" onclick="selecionarOpcao(this, 'diaria', '1', 50, 'Diária / 1 manete')">
+                Diária / 1 manete - R$50
+              </button>
+              <button type="button" onclick="selecionarOpcao(this, 'diaria', '2', 60, 'Diária / 2 manetes')">
+                Diária / 2 manetes - R$60
+              </button>
+            </div>
+          </div>
+
           <div class="grupo-preco">
-    <div class="grupo-titulo">Final de semana</div>
-    <div class="botoes-preco">
-      <button type="button" onclick="selecionarOpcao(this, 'fds', '1', 100, 'FDS / 1 manete')">
-        FDS / 1 manete - R$100
-      </button>
-      <button type="button" onclick="selecionarOpcao(this, 'fds', '2', 110, 'FDS / 2 manetes')">
-        FDS / 2 manetes - R$110
-      </button>
-    </div>
-  </div>
-</div>
+            <div class="grupo-titulo">Final de semana</div>
+            <div class="botoes-preco">
+              <button type="button" onclick="selecionarOpcao(this, 'fds', '1', 100, 'FDS / 1 manete')">
+                FDS / 1 manete - R$100
+              </button>
+              <button type="button" onclick="selecionarOpcao(this, 'fds', '2', 110, 'FDS / 2 manetes')">
+                FDS / 2 manetes - R$110
+              </button>
+            </div>
+          </div>
+        </div>
 
         <div class="manual-box">
           <button type="button" class="btn-manual" onclick="toggleManual()">
@@ -165,16 +215,44 @@
       </section>
 
       <section class="card">
-        <div class="titulo-com-filtro">
+        <div class="topo-historico">
           <h3>Histórico</h3>
+          <button type="button" class="btn-pdf" onclick="gerarPDF()">
+            Gerar relatório em PDF
+          </button>
+        </div>
 
-          <div class="campo filtro-cliente">
+        <div class="filtros-grid">
+          <div class="campo">
             <label for="filtroHistoricoCliente">Histórico por cliente</label>
             <select id="filtroHistoricoCliente" onchange="render()">
               <option value="">Todos os clientes</option>
             </select>
           </div>
+
+          <div class="campo">
+            <label for="filtroPeriodo">Filtro por data</label>
+            <select id="filtroPeriodo" onchange="alterarPeriodo()">
+              <option value="todos">Todos</option>
+              <option value="hoje">Hoje</option>
+              <option value="semana">Esta semana</option>
+              <option value="mes">Este mês</option>
+              <option value="personalizado">Personalizado</option>
+            </select>
+          </div>
+
+          <div class="campo filtro-data-personalizado oculto" id="boxDataInicio">
+            <label for="dataInicio">Data inicial</label>
+            <input type="date" id="dataInicio" onchange="render()" />
+          </div>
+
+          <div class="campo filtro-data-personalizado oculto" id="boxDataFim">
+            <label for="dataFim">Data final</label>
+            <input type="date" id="dataFim" onchange="render()" />
+          </div>
         </div>
+
+        <div class="cards-mobile" id="cardsMobile"></div>
 
         <div class="tabela-mobile">
           <table>
